@@ -9,7 +9,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 //importación del archivo index en routes
-app.use(require('./routes/routes'))
+app.use(require('./../routes/routes'))
 
 app.listen(port, ()=> {
     console.log(`Escuchando por el puerto ${port}`);
