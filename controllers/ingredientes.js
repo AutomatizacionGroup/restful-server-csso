@@ -12,13 +12,15 @@ let putIngrediente = (req, res) => {
 let getIngrediente = (req, res) => {
     res.send('ok');
 };
-let deleteIngredientes = (req, res) => {
+let deleteIngrediente = (req, res) => {
     res.send('ok');
 };
 
-
-
+// Exportar funciones
 module.exports = {
-    getIngredientes,postIngrediente,
-    putIngrediente,getIngrediente,deleteIngredientes,
+    getIngredientes,
+    postIngrediente,
+    putIngrediente,
+    getIngrediente,
+    deleteIngrediente
 };
