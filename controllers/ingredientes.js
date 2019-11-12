@@ -16,10 +16,9 @@ let deleteIngredientes = (req, res) => {
     res.send('ok');
 };
 
+
+
 module.exports = {
-    getIngredientes,
-    postIngrediente,
-    putIngrediente,
-    getIngrediente,
-    deleteIngredientes
+    getIngredientes,postIngrediente,
+    putIngrediente,getIngrediente,deleteIngredientes,
 };
