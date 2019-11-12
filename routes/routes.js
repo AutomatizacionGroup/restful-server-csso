@@ -1,18 +1,15 @@
 const express = require('express');
 const app = express();
+const control = require('../controllers/controllers')
 
-app.get('/ingredientes', function(req, res) {
+app.get('/ingredientes/lista', control.getIngredientes)
 
-});
-app.post('/ingredientes', function(req, res) {
+app.post('/ingredientes/ingrediente', control.postIngrediente);
 
-});
-app.put('/ingredientes', function(req, res) {
+app.put('/ingredientes/ingrediente/:id', control.putIngrediente);
 
-});
-app.delete('/ingredientes', function(req, res) {
+app.get('/ingredientes/ingrediente/:id', control.getIngrediente);
 
-});
-
+app.delete('/ingredientes/ingrediente/:id', control.deleteIngredientes);
 
 module.exports = app;

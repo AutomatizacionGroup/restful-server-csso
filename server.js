@@ -10,10 +10,7 @@ app.use(bodyParser.json());
 
 //importación del archivo index en routes
 app.use(require('./routes/routes'))
-app.use(require('./controllers/controllers'))
 
 app.listen(port, ()=> {
     console.log(`Escuchando por el puerto ${port}`);
-
-
 });
