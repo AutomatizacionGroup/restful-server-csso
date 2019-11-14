@@ -1,8 +1,6 @@
 const Receta = require('../models/recetas')
-const Ingrediente = require('../models/ingredientes')
 
 let getRecetas = (req, res) => {
-
 
     Receta.find({})
         .exec((err, recetasDB) =>{
@@ -18,11 +16,7 @@ let getRecetas = (req, res) => {
                 ok: true,
                 recetasDB
             });
-
-
-            
         })
-
 };
 
 let postReceta = (req, res) => {
@@ -48,25 +42,7 @@ let postReceta = (req, res) => {
             ok: true,
             receta: recetaDB
         });
-
-
     });
-
-    
-    // Ingrediente.findById({})
-    //     .exec((err, ingredientesDB) =>{
-
-    //         if (err) {
-    //             return res.status(400).json({
-    //                 ok:false,
-    //                 err
-    //             })
-    //         };
-
-            
-    //     })
-
-
 };
 
 let getReceta = (req, res) => {
@@ -86,7 +62,6 @@ let getReceta = (req, res) => {
             recetaDB
         })
     })
-
 };
 
 let putReceta = (req, res) => {
@@ -108,9 +83,7 @@ let putReceta = (req, res) => {
             ok: true,
             recetaModificada
         })
-
     })
-
 };
 
 
@@ -134,9 +107,7 @@ let deleteReceta = (req, res) => {
             ok: true,
             recetaInhabilitada
         })
-
     })
-
 };
 
 

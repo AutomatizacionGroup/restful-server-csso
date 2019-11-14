@@ -11,6 +11,7 @@ app.use(bodyParser.json());
 app.use(require('./../routes/routes'))
 
 mongoose.set('useCreateIndex', true)
+mongoose.set('useFindAndModify', false);
 
 mongoose.connect(process.env.URLDB, { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true  }, (err, resp) => {
 

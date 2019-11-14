@@ -1,19 +1,108 @@
-//funciones
+const Orden = require('../models/ordenes')
+const Receta = require('../models/recetas')
+const Ingrediente = require('../models/ingredientes')
 
 let getOrdenes = (req, res) => {
-    res.send('ok');
+    Orden.find({})
+        .exec((err, ordenesDB) =>{
+
+            if (err) {
+                return res.status(400).json({
+                    ok:false,
+                    err
+                })
+            };
+
+            res.status(200).json({
+                ok: true,
+                ordenesDB
+            });
+        })
 };
+
 let postOrden = (req, res) => {
-    res.send('ok');
+    let body = req.body;
+    
+    let orden = new Orden({
+        codigoSKU: body.codigoSKU,
+        cantidad: body.cantidad
+    });
+
+    orden.save((err, ordenDB) =>{
+
+        if (err) {
+            return res.status(400).json({
+                ok: false,
+                err
+            });
+        }
+
+        res.status(201).json({
+            ok: true,
+            receta: ordenDB
+        });
+    });
 };
+
 let putOrden = (req, res) => {
-    res.send('ok');
+    let id = req.params.id;
+    let body = req.body;
+
+    Orden.findByIdAndUpdate(id, body, {new:true, runValidators: true}, (err, ordenModificada)=>{
+
+        if (err) {
+            return res.status(400).json({
+                ok: false,
+                err
+            });
+
+        };
+
+        res.json({
+            ok: true,
+            ordenModificada
+        })
+    })
 };
+
 let getOrden = (req, res) => {
-    res.send('ok');
+    let id = req.params.id;
+
+    Orden.findById(id, (err, ordenDB)=>{
+        if (err) {
+            return res.status(400).json({
+                ok: false,
+                err
+            })
+        };
+
+        res.status(200).json({
+            ok: true,
+            ordenDB
+        })
+    })
 };
+
 let deleteOrden = (req, res) => {
-    res.send('ok');
+    let id = req.params.id;
+    let cambioEstado = {
+        estado: false
+    }
+
+    Orden.findByIdAndUpdate(id, cambioEstado, {new:true, runValidators: true}, (err, ordenInhabilitada)=>{
+
+        if (err) {
+            return res.status(400).json({
+                ok: false,
+                err
+            });
+        };
+
+        res.json({
+            ok: true,
+            ordenInhabilitada
+        })
+    })
 };
 
 // Exportar funciones
