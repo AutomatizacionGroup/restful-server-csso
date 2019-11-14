@@ -1,20 +1,144 @@
-//Funciones de las apis
+const Receta = require('../models/recetas')
+const Ingrediente = require('../models/ingredientes')
 
 let getRecetas = (req, res) => {
-    res.send('ok');
+
+
+    Receta.find({})
+        .exec((err, recetasDB) =>{
+
+            if (err) {
+                return res.status(400).json({
+                    ok:false,
+                    err
+                })
+            };
+
+            res.status(200).json({
+                ok: true,
+                recetasDB
+            });
+
+
+            
+        })
+
 };
+
 let postReceta = (req, res) => {
-    res.send('ok');
+    let body = req.body;
+    // console.log(body)
+    let receta = new Receta({
+        nombre: body.nombre,
+        codigoSKU: body.codigoSKU,
+        cantReceta: body.cantReceta,
+        ingredientes: body.ingredientes
+    });
+
+    receta.save((err, recetaDB) =>{
+
+        if (err) {
+            return res.status(400).json({
+                ok: false,
+                err
+            });
+        }
+
+        res.status(201).json({
+            ok: true,
+            receta: recetaDB
+        });
+
+
+    });
+
+    
+    // Ingrediente.findById({})
+    //     .exec((err, ingredientesDB) =>{
+
+    //         if (err) {
+    //             return res.status(400).json({
+    //                 ok:false,
+    //                 err
+    //             })
+    //         };
+
+            
+    //     })
+
+
 };
-let putReceta = (req, res) => {
-    res.send('ok');
-};
+
 let getReceta = (req, res) => {
-    res.send('ok');
+    
+    let id = req.params.id;
+
+    Receta.findById(id, (err, recetaDB)=>{
+        if (err) {
+            return res.status(400).json({
+                ok: false,
+                err
+            })
+        };
+
+        res.status(200).json({
+            ok: true,
+            recetaDB
+        })
+    })
+
 };
+
+let putReceta = (req, res) => {
+    
+    let id = req.params.id;
+    let body = req.body;
+
+    Receta.findByIdAndUpdate(id, body, {new:true, runValidators: true}, (err, recetaModificada)=>{
+
+        if (err) {
+            return res.status(400).json({
+                ok: false,
+                err
+            });
+
+        };
+
+        res.json({
+            ok: true,
+            recetaModificada
+        })
+
+    })
+
+};
+
+
 let deleteReceta = (req, res) => {
-    res.send('ok');
+    
+    let id = req.params.id;
+    let cambioEstado = {
+        estado: false
+    }
+
+    Receta.findByIdAndUpdate(id, cambioEstado, {new:true, runValidators: true}, (err, recetaInhabilitada)=>{
+
+        if (err) {
+            return res.status(400).json({
+                ok: false,
+                err
+            });
+        };
+
+        res.json({
+            ok: true,
+            recetaInhabilitada
+        })
+
+    })
+
 };
+
 
 module.exports = {
     getRecetas, getReceta, postReceta, putReceta, deleteReceta

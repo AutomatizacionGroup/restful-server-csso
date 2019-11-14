@@ -7,8 +7,10 @@ let ingredienteSchema = new Schema({
 
     nombre: { type: String, required: [true, 'El nombre es necesario'] },
     fecha: { type: Date, default: Date.now },
-    pesoMin: {type: Number, required: [true, 'El peso es necesario'] },
-    posAnaquel: {type: String, required: [true, 'la posicion en el anaquel es necesario'] },
+    proporcion: {type: [Number], required: [true, 'El peso es necesario'], of: Float32Array },
+    posAnaquel: {type: Array, required: [true, 'la posicion en el anaquel es necesario'] },
+    cont: {type: [Number], required: [true, 'indicar cuantas unidadeds de agregaron es necesario'] },
+    estado: { type: Boolean, default: true}
 
 })
 
